@@ -16,5 +16,50 @@ namespace GoFishing
         {
             InitializeComponent();
         }
+
+        private Game game;
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if(String.IsNullOrEmpty(textName.Text))
+            {
+                MessageBox.Show("Wpisza swoje imię", "Nie można jeszcze rozpocząć gry.");
+                return;
+            }
+
+            game = new Game(textName.Text, new List<string> { "Janek", "Bartek" }, textProgres);
+            buttonStart.Enabled = false;
+            textName.Enabled = false;
+            buttonAsk.Enabled = true;
+        }
+
+        private void UpdateForm()
+        {
+            listHand.Items.Clear();
+            foreach (String cardName in game.GetPlayerCardNames())
+                listHand.Items.Add(cardName);
+            textBooks.Text = game.DescribleBoks();
+            textProgres.Text += game.DescribePlayerHands();
+            textProgres.SelectionStart = textProgres.Text.Length;
+            textProgres.ScrollToCaret();
+        }
+
+        private void buttonAsk_Click(object sender, EventArgs e)
+        {
+            textProgres.Text = "";
+            if(listHand.SelectedIndex < 0)
+            {
+                MessageBox.Show("Wybierz kartę.");
+                return;
+            }
+            if (game.PlayOneRound(listHand.SelectedIndex))
+            {
+                textProgres.Text += "Zwycięzcą jest..." + game.GetWinNnerName();
+                textBooks.Text = game.game.DescribleBoks();
+                buttonAsk.Enabled = false;
+            }
+            else
+                UpdateForm();
+        }
     }
 }

@@ -64,6 +64,7 @@
             this.buttonStart.TabIndex = 2;
             this.buttonStart.Text = "Rozpocznij grę!";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // listHand
             // 
@@ -110,6 +111,7 @@
             this.buttonAsk.TabIndex = 7;
             this.buttonAsk.Text = "Zarządaj karty";
             this.buttonAsk.UseVisualStyleBackColor = true;
+            this.buttonAsk.Click += new System.EventHandler(this.buttonAsk_Click);
             // 
             // label3
             // 
