@@ -31,6 +31,7 @@ namespace GoFishing
             buttonStart.Enabled = false;
             textName.Enabled = false;
             buttonAsk.Enabled = true;
+            UpdateForm();
         }
 
         private void UpdateForm()
@@ -38,7 +39,7 @@ namespace GoFishing
             listHand.Items.Clear();
             foreach (String cardName in game.GetPlayerCardNames())
                 listHand.Items.Add(cardName);
-            textBooks.Text = game.DescribleBoks();
+            textBooks.Text = game.DescribeBooks();
             textProgres.Text += game.DescribePlayerHands();
             textProgres.SelectionStart = textProgres.Text.Length;
             textProgres.ScrollToCaret();
@@ -54,8 +55,8 @@ namespace GoFishing
             }
             if (game.PlayOneRound(listHand.SelectedIndex))
             {
-                textProgres.Text += "Zwycięzcą jest..." + game.GetWinNnerName();
-                textBooks.Text = game.game.DescribleBoks();
+                textProgres.Text += "Zwycięzcą jest..." + game.GetWinnerName();
+                textBooks.Text = game.DescribeBooks();
                 buttonAsk.Enabled = false;
             }
             else
